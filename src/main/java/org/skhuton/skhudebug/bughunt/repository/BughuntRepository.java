@@ -7,4 +7,5 @@ import java.math.BigDecimal;
 import java.util.List;
 
 public interface BughuntRepository extends JpaRepository<Bughunt, Long> {
+    List<Bughunt> findByLatitudeBetweenAndLongitudeBetween(BigDecimal minLat, BigDecimal maxLat, BigDecimal minLng, BigDecimal maxLng);
 }
