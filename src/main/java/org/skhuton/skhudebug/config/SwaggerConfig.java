@@ -17,8 +17,8 @@ public class SwaggerConfig {
 
     private Info apiInfo() {
         return new Info()
-                .title("SKHU-DEBUG API") // API의 제목
-                .description("It's about SKHU-DEBUG!") // API에 대한 설명
-                .version("1.0.0"); // API의 버전
+                .title("SKHU-DEBUG API")
+                .description("It's about SKHU-DEBUG!")
+                .version("1.0.0");
     }
 }
