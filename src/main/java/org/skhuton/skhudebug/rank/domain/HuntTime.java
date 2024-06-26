@@ -14,6 +14,7 @@ public class HuntTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "hunt_time_id")
     private Long id;
 
     @OneToOne
