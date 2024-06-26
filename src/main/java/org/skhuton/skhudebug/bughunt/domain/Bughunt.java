@@ -1,4 +1,4 @@
-package org.skhuton.skhudebug.location.domain;
+package org.skhuton.skhudebug.bughunt.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -12,10 +12,10 @@ import java.math.BigDecimal;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Location {
+public class Bughunt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "location_id")
+    @Column(name = "bughunt_id")
     private Long id;
 
     @ManyToOne
@@ -28,8 +28,14 @@ public class Location {
     @Column(precision = 11, scale = 8)
     private BigDecimal longitude;
 
+    private int bugNum;
+    private String bugSize;
+    private String bugType;
+    private int range;
+
     @Builder
-    public Location(User user, BigDecimal latitude, BigDecimal longitude) {
+    public Bughunt(User user, BigDecimal latitude, BigDecimal longitude) {
+        this.user = user;
         this.latitude = latitude;
         this.longitude = longitude;
     }

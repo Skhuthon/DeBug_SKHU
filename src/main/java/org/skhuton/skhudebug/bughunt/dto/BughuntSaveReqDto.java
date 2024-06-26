@@ -1,8 +1,8 @@
-package org.skhuton.skhudebug.location.dto;
+package org.skhuton.skhudebug.bughunt.dto;
 
 import java.math.BigDecimal;
 
-public record LocationSaveReqDto(
+public record BughuntSaveReqDto(
         String loginId, // login id
         BigDecimal latitude,
         BigDecimal  longitude
