@@ -6,8 +6,12 @@ import org.skhuton.skhudebug.bughunt.dto.BughuntSaveReqDto;
 import org.skhuton.skhudebug.bughunt.repository.BughuntRepository;
 import org.skhuton.skhudebug.member.domain.User;
 import org.skhuton.skhudebug.member.repository.UserRepository;
+import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 @Service
 @Transactional(readOnly = true)
@@ -17,16 +21,21 @@ public class BughuntService {
     private final UserRepository userRepository;
 
     @Transactional
-    public void save(BughuntSaveReqDto bughuntSaveReqDto) {
+    public Bughunt save(BughuntSaveReqDto bughuntSaveReqDto) {
         User user = userRepository.findByLoginId(bughuntSaveReqDto.loginId())
-                .orElseThrow(() -> new IllegalArgumentException("User not found"));
+                .orElseThrow(() -> new IllegalArgumentException("유저 정보를 찾을 수 없습니다"));
 
         Bughunt bughunt = Bughunt.builder()
                 .user(user)
                 .latitude(bughuntSaveReqDto.latitude())
                 .longitude(bughuntSaveReqDto.longitude())
+                .bugNum(bughuntSaveReqDto.bugNum())
+                .bugSize(bughuntSaveReqDto.bugSize())
+                .bugType(bughuntSaveReqDto.bugType())
+                .radius(bughuntSaveReqDto.radius())
                 .build();
 
-        bughuntRepository.save(bughunt);
+        bughunt.setCreatedAt(LocalDateTime.now());
+        return bughuntRepository.save(bughunt);
     }
 }
