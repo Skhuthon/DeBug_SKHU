@@ -61,7 +61,6 @@ public class SecurityConfig extends Exception {
                         .maxSessionsPreventsLogin(false)
                         .sessionRegistry(sessionRegistry())
                 )
-                //form login 설정
                 .formLogin((formLogin) ->
                         formLogin
                                 .usernameParameter("loginId")
