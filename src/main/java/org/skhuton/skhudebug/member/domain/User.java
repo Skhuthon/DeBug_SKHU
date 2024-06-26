@@ -19,8 +19,6 @@ public class User implements Serializable {
 
     static final long serialVersionUID = 1;
 
-    private static final Pattern EMAIL_PATTERN = Pattern.compile("^[a-zA-Z0-9._%+-]+@gmail\\.com$");
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
