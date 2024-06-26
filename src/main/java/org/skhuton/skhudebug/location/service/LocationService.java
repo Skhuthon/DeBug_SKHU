@@ -1,6 +1,7 @@
 package org.skhuton.skhudebug.location.service;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.skhuton.skhudebug.location.domain.Location;
 import org.skhuton.skhudebug.location.dto.LocationSaveReqDto;
 import org.skhuton.skhudebug.location.repository.LocationRepository;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
+@Slf4j
 public class LocationService {
     private final LocationRepository locationRepository;
     private final UserRepository userRepository;

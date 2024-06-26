@@ -19,7 +19,7 @@ public class Location {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="userId", nullable = false)
+    @JoinColumn(name="user_id", nullable = false)
     private User user;
 
     @Column(precision = 10, scale = 8)
@@ -30,6 +30,7 @@ public class Location {
 
     @Builder
     public Location(User user, BigDecimal latitude, BigDecimal longitude) {
+        this.user = user;
         this.latitude = latitude;
         this.longitude = longitude;
     }
