@@ -2,16 +2,18 @@ package org.skhuton.skhudebug.bughunt.service;
 
 import lombok.RequiredArgsConstructor;
 import org.skhuton.skhudebug.bughunt.domain.Bughunt;
-import org.skhuton.skhudebug.bughunt.dto.BughuntSaveReqDto;
+import org.skhuton.skhudebug.bughunt.dto.request.BughuntSaveReqDto;
+import org.skhuton.skhudebug.bughunt.dto.response.BughuntInfoResDto;
+import org.skhuton.skhudebug.bughunt.dto.response.BughuntListResDto;
 import org.skhuton.skhudebug.bughunt.repository.BughuntRepository;
 import org.skhuton.skhudebug.member.domain.User;
 import org.skhuton.skhudebug.member.repository.UserRepository;
-import org.springframework.cglib.core.Local;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
@@ -37,5 +39,12 @@ public class BughuntService {
 
         bughunt.setCreatedAt(LocalDateTime.now());
         return bughuntRepository.save(bughunt);
+    }
+    public BughuntListResDto findAll(){
+        List<Bughunt> bughunts = bughuntRepository.findAll();
+        List<BughuntInfoResDto> bughuntInfoResDtoList = bughunts.stream()
+                .map(BughuntInfoResDto::from)
+                .toList();
+        return BughuntListResDto.from(bughuntInfoResDtoList);
     }
 }

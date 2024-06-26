@@ -1,4 +1,4 @@
-package org.skhuton.skhudebug.bughunt.dto;
+package org.skhuton.skhudebug.bughunt.dto.request;
 
 import java.math.BigDecimal;
 
