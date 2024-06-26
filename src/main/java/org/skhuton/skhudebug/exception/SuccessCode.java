@@ -10,7 +10,7 @@ import org.springframework.http.HttpStatus;
 public enum SuccessCode {
 
     /*201 CREATED*/
-    LOCATION_CREATE_SUCCESS(HttpStatus.CREATED, "사용자 위치 정보가 생성되었습니다"),
+    BUGHUNT_CREATE_SUCCESS(HttpStatus.CREATED, "헌터 구인 요청 완료"),
     ;
 
     private final HttpStatus httpStatus;
