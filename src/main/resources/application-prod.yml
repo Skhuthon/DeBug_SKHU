@@ -1,0 +1,9 @@
+spring:
+  config:
+    activate:
+      on-profile: prod
+  datasource:
+    url: jdbc:mysql://localhost:3306/skhudebug
+    username: root
+    password: sksla7929@
+    driver-class-name: com.mysql.cj.jdbc.Driver
