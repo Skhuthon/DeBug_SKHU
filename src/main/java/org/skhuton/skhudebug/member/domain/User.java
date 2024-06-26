@@ -37,8 +37,6 @@ public class User implements Serializable {
 
     @Builder
     private User(String loginId, String password, String nickname, Role role) {
-
-
         this.loginId = loginId;
         this.password = password;
         this.nickname = nickname;

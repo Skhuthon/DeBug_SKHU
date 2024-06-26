@@ -43,6 +43,4 @@ public class UserJoinService {
             throw new InvalidUserException("This ID is already taken.");
         }
     }
-
-
 }
