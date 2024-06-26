@@ -1,10 +1,12 @@
 package org.skhuton.skhudebug.member.handler;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.skhuton.skhudebug.member.repository.UserRepository;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.stereotype.Component;
@@ -13,10 +15,16 @@ import java.io.IOException;
 
 @Slf4j
 @Component
+@RequiredArgsConstructor
 public class CustomAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
-
+    private final UserRepository userRepository;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        String nickname = userRepository.findByLoginId(authentication.getName()).get().getNickname();
+        Cookie cookie = new Cookie("nickname", nickname);
+        cookie.setHttpOnly(false);
+        cookie.setSecure(true);
+        response.addCookie(cookie);
         response.setStatus(HttpServletResponse.SC_OK);
     }
 }
