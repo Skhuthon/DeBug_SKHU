@@ -24,7 +24,7 @@ public class Bughunt {
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name="userId", nullable = false)
+    @JoinColumn(name="user_id", nullable = false)
     private User user;
 
     @Column(precision = 10, scale = 8, nullable = false)

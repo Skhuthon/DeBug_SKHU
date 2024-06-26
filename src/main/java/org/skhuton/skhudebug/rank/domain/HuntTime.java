@@ -21,5 +21,6 @@ public class HuntTime {
     private User user;
 
     //벌레 잡기 횟수
+    @Column(name = "times")
     private int times;
 }
