@@ -23,7 +23,7 @@ public class Bughunt {
     private User user;
 
     @Column(precision = 10, scale = 8)
-    private BigDecimal latitude;    //BigDecimal 부동소수점 오류 방지(위도, 경도 정확 표현)
+    private BigDecimal latitude;
 
     @Column(precision = 11, scale = 8)
     private BigDecimal longitude;
@@ -34,9 +34,13 @@ public class Bughunt {
     private int range;
 
     @Builder
-    public Bughunt(User user, BigDecimal latitude, BigDecimal longitude) {
+    public Bughunt(User user, BigDecimal latitude, BigDecimal longitude, int bugNum, String bugSize, String bugType, int range) {
         this.user = user;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.bugNum = bugNum;
+        this.bugSize = bugSize;
+        this.bugType = bugType;
+        this.range = range;
     }
 }
