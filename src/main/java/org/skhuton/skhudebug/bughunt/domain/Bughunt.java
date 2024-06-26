@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Getter
+@Table(name = "bughunt")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Bughunt {
     @Id

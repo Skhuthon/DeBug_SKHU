@@ -3,18 +3,17 @@ package org.skhuton.skhudebug.bughunt.controller;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import org.skhuton.skhudebug.bughunt.domain.Bughunt;
+import lombok.extern.slf4j.Slf4j;
+import org.skhuton.skhudebug.bughunt.dto.response.BughuntListResDto;
 import org.skhuton.skhudebug.common.dto.BaseResponse;
 import org.skhuton.skhudebug.exception.SuccessCode;
-import org.skhuton.skhudebug.bughunt.dto.BughuntSaveReqDto;
+import org.skhuton.skhudebug.bughunt.dto.request.BughuntSaveReqDto;
 import org.skhuton.skhudebug.bughunt.service.BughuntService;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/bughunt")
@@ -22,10 +21,17 @@ import org.springframework.web.bind.annotation.RestController;
 public class BughuntController {
     private final BughuntService bughuntService;
 
-    @Operation(summary = "버그 헌트 요청 생성", description = "사용자 위치 및 벌레 세부정보가 포함된 버그헌터 찾기 요청 생성")
+    @Operation(summary = "버그 헌트 요청 생성", description = "사용자 위치 및 벌레 세부정보가 포함된 버그헌터 찾기 요청 생성하기")
     @PostMapping
-    public BaseResponse<String> createBughunt(@RequestBody BughuntSaveReqDto bughuntSaveReqDto) {
+    public BaseResponse<String> bughuntCreate(@RequestBody BughuntSaveReqDto bughuntSaveReqDto) {
         bughuntService.save(bughuntSaveReqDto);
         return BaseResponse.success(SuccessCode.BUGHUNT_CREATE_SUCCESS);
+    }
+
+    @Operation(summary = "버그 헌트 요청 조회", description = "헌터 위치 범위 내에 있는 헌트 요청들 조회하기")
+    @GetMapping
+    public BaseResponse<BughuntListResDto> bughuntFindAll(){
+        BughuntListResDto bughuntListResDto= bughuntService.findAll();
+        return BaseResponse.success(SuccessCode.GET_SUCCESS, bughuntListResDto);
     }
 }
