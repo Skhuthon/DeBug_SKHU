@@ -7,3 +7,32 @@ spring:
     username: ${DB_USER}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: false
+        use_sql_comments: true
+    session:
+      jdbc:
+        initialize-schema: always
+logging.level:
+    org.hibernate.SQL: debug
+    org.hibernate.type: debug
+
+server:
+  port: 8080
+  servlet:
+    session:
+      cookie:
+        same-site: None
+        secure: true
+        name: SESSION
+        path: /
+      timeout: 30m
+  tomcat:
+    connection-timeout: 300000
