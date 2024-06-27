@@ -36,3 +36,9 @@ server:
       timeout: 30m
   tomcat:
     connection-timeout: 300000
+  ssl:
+    key-store: ${KEY_STORE}
+    key-store-password: ${KEY_STORE_PASSWORD}
+    key-alias: tomcat
+    key-store-type: pkcs12
+    enabled: true
