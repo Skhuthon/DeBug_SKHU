@@ -14,7 +14,6 @@ public class HuntTime {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "hunt_time_id")
     private Long id;
 
     @OneToOne
@@ -22,6 +21,5 @@ public class HuntTime {
     private User user;
 
     //벌레 잡기 횟수
-    @Column(name = "times")
     private int times;
 }
