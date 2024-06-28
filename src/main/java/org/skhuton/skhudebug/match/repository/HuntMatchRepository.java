@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface HuntMatchRepository extends JpaRepository<HuntReqManagement, Long> {
     HuntReqManagement findBySenderId(String senderId);
+    HuntReqManagement findByRequestId(Long requestId);
 }

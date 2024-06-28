@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.skhuton.skhudebug.common.dto.BaseResponse;
 import org.skhuton.skhudebug.exception.SuccessCode;
+import org.skhuton.skhudebug.match.dto.CompleteHuntReqDto;
 import org.skhuton.skhudebug.match.dto.MatchReqDto;
 import org.skhuton.skhudebug.match.service.MatchService;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,5 +30,15 @@ public class BughuntMatchController {
     public BaseResponse<String> bughuntMatching(@RequestBody MatchReqDto matchReqDto) {
         matchService.acceptByHunter(matchReqDto);
         return BaseResponse.success(SuccessCode.BUGHUNT_REQUEST_ACCEPT);
+    }
+
+    @Operation(summary = "헌트 요청 완료", description = "헌트 요청을 완료하는 API")
+    @Parameters({
+            @Parameter(name = "requestId", description = "헌트 요청 건 고유의 아이디", required = true)
+    })
+    @PostMapping("/bughunt/complete")
+    public BaseResponse<String> bughuntComplete(@RequestBody CompleteHuntReqDto completeHuntReqDto) {
+        matchService.completeMatch(completeHuntReqDto);
+        return BaseResponse.success(SuccessCode.BUGHUNT_REQUEST_COMPLETE);
     }
 }
