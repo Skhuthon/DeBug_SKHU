@@ -52,7 +52,7 @@ public class BughuntService {
         HuntReqManagement huntReqManagement = HuntReqManagement.builder()
                 .requestId(getvalue.getId())
                 .senderId(user.getLoginId())
-                .senderId(null)
+                .receiveId(null)
                 .complete(false)
                 .build();
         huntMatchRepository.save(huntReqManagement);

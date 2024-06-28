@@ -25,9 +25,9 @@ public class HuntReqManagement {
     @Column(name = "sender_id", nullable = false)
     private String senderId;
 
-    @Column(name = "receive_id", nullable = false)
+    @Column(name = "receive_id", nullable = true)
     private String receiveId;
 
-    @Column(name = "complete", nullable = false)
+    @Column(name = "complete", nullable = true)
     private boolean complete;
 }
