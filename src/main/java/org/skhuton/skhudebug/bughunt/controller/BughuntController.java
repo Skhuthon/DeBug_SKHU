@@ -39,9 +39,9 @@ public class BughuntController {
         return BaseResponse.success(SuccessCode.GET_SUCCESS, bughuntListResDto);
     }
     @Operation(summary = "헌트 요청 개별 id 조회", description = "개별 id로 헌트 요청 조회하기")
-    @GetMapping("/{id}")
-    public BaseResponse<BughuntInfoResDto> bughuntFindById(@PathVariable Long id){
-        BughuntInfoResDto bughuntInfoResDto = bughuntService.findById(id);
+    @GetMapping("/user")
+    public BaseResponse<BughuntInfoResDto> bughuntFindById(@RequestParam String loginId){   //requestparam
+        BughuntInfoResDto bughuntInfoResDto = bughuntService.findByLoginId(loginId);
         return BaseResponse.success(SuccessCode.GET_SUCCESS, bughuntInfoResDto);
     }
 

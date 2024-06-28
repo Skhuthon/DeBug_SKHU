@@ -68,9 +68,15 @@ public class BughuntService {
         return BughuntListResDto.from(bughuntInfoResDtoList);
     }
 
-    public BughuntInfoResDto findById(Long id){
+/*    public BughuntInfoResDto findById(Long id){
         Bughunt bughunt = bughuntRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("버그 헌트 요청 id 조회 불가: " + id));
+        return BughuntInfoResDto.from(bughunt);
+    }*/
+
+    public BughuntInfoResDto findByLoginId(String loginId) {    // bughunt id 조회 -> loginId(사용자당 하나의 구인 올릴 수 있음)
+        Bughunt bughunt = bughuntRepository.findByUserLoginId(loginId)
+                .orElseThrow(() -> new EntityNotFoundException("해당 아이디 조회 불가: " + loginId));
         return BughuntInfoResDto.from(bughunt);
     }
 
