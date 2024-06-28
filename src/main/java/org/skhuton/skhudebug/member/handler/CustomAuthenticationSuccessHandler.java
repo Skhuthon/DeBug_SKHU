@@ -23,7 +23,7 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
         String loginId = userRepository.findByLoginId(authentication.getName()).get().getLoginId();
         Cookie cookie = new Cookie("loginId", loginId);
         cookie.setHttpOnly(false);
-        cookie.setSecure(true);
+        cookie.setSecure(false);
         response.addCookie(cookie);
         response.setStatus(HttpServletResponse.SC_OK);
     }
