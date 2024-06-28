@@ -20,11 +20,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private final UserRepository userRepository;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String loginId = userRepository.findByLoginId(authentication.getName()).get().getLoginId();
-        Cookie cookie = new Cookie("loginId", loginId);
-        cookie.setHttpOnly(false);
-        cookie.setSecure(false);
-        response.addCookie(cookie);
         response.setStatus(HttpServletResponse.SC_OK);
     }
 }
