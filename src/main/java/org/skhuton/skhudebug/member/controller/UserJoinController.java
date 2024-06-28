@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.Parameters;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.skhuton.skhudebug.member.dto.JoinRequestDto;
+import org.skhuton.skhudebug.member.dto.request.JoinRequestDto;
 import org.skhuton.skhudebug.member.service.UserJoinService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

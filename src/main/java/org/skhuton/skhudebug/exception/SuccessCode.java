@@ -16,7 +16,9 @@ public enum SuccessCode {
     /*200 OK*/
     RANKING_GET_SUCCESS(HttpStatus.OK, "랭킹 조회 성공"),
     GET_SUCCESS(HttpStatus.OK, "조회 완료"),
-    BUGHUNT_RADIUS_GET_SUCCESS(HttpStatus.OK, "조회 완료")
+    BUGHUNT_RADIUS_GET_SUCCESS(HttpStatus.OK, "조회 완료"),
+    BUGHUNT_REQUEST_ACCEPT(HttpStatus.OK, "헌터 구인 요청 수락 완료"),
+    BUGHUNT_REQUEST_COMPLETE(HttpStatus.OK, "벌레 제거 완료")
     ;
 
     private final HttpStatus httpStatus;
