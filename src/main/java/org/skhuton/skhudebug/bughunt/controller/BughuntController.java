@@ -4,6 +4,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.skhuton.skhudebug.bughunt.domain.Bughunt;
+import org.skhuton.skhudebug.bughunt.dto.request.BughuntLocationReqDto;
 import org.skhuton.skhudebug.bughunt.dto.response.BughuntListResDto;
 import org.skhuton.skhudebug.common.dto.BaseResponse;
 import org.skhuton.skhudebug.exception.SuccessCode;
@@ -38,9 +40,8 @@ public class BughuntController {
 
     @Operation(summary = "헌트 요청 범위 조회", description = "헌터 위치 범위 내에 있는 헌트 요청들 조회하기")
     @GetMapping("/nearby")
-    public BaseResponse<BughuntListResDto> bughuntFindRadius(@RequestParam BigDecimal latitude, @RequestParam BigDecimal longitude, @RequestParam int radius){
-        BughuntListResDto bughuntListResDto = bughuntService.findByRadius(latitude, longitude, radius);
+    public BaseResponse<BughuntListResDto> bughuntFindRadius(@RequestBody BughuntLocationReqDto bughuntLocationReqDto){
+        BughuntListResDto bughuntListResDto = bughuntService.findByRadius(bughuntLocationReqDto);
         return BaseResponse.success(SuccessCode.BUGHUNT_RADIUS_GET_SUCCESS, bughuntListResDto);
     }
-
 }

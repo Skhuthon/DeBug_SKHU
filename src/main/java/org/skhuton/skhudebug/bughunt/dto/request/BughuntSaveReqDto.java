@@ -1,5 +1,7 @@
 package org.skhuton.skhudebug.bughunt.dto.request;
 
+import lombok.Getter;
+
 import java.math.BigDecimal;
 
 public record BughuntSaveReqDto(

@@ -1,17 +1,14 @@
 package org.skhuton.skhudebug.bughunt.domain;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.skhuton.skhudebug.member.domain.User;
-import org.springframework.cglib.core.Local;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
@@ -44,7 +41,7 @@ public class Bughunt {
     private LocalDateTime createdAt;
 
     @Builder
-    public Bughunt(User user, BigDecimal latitude, BigDecimal longitude, int bugNum, String bugSize, String bugType, int radius, LocalDateTime createdAt) {
+    public Bughunt(User user, BigDecimal latitude, BigDecimal longitude, int bugNum, String bugSize, String bugType, int radius) {
         this.user = user;
         this.latitude = latitude;
         this.longitude = longitude;

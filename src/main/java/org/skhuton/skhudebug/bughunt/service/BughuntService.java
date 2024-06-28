@@ -2,6 +2,7 @@ package org.skhuton.skhudebug.bughunt.service;
 
 import lombok.RequiredArgsConstructor;
 import org.skhuton.skhudebug.bughunt.domain.Bughunt;
+import org.skhuton.skhudebug.bughunt.dto.request.BughuntLocationReqDto;
 import org.skhuton.skhudebug.bughunt.dto.request.BughuntSaveReqDto;
 import org.skhuton.skhudebug.bughunt.dto.response.BughuntInfoResDto;
 import org.skhuton.skhudebug.bughunt.dto.response.BughuntListResDto;
@@ -44,6 +45,7 @@ public class BughuntService {
         bughunt.setCreatedAt(LocalDateTime.now());
         return bughuntRepository.save(bughunt);
     }
+
     public BughuntListResDto findAll(){
         List<Bughunt> bughunts = bughuntRepository.findAll();
         List<BughuntInfoResDto> bughuntInfoResDtoList = bughunts.stream()
@@ -52,7 +54,11 @@ public class BughuntService {
         return BughuntListResDto.from(bughuntInfoResDtoList);
     }
 
-    public BughuntListResDto findByRadius(BigDecimal userLat, BigDecimal userLng, int radius) {
+    public BughuntListResDto findByRadius(BughuntLocationReqDto bughuntLocationReqDto) {
+        BigDecimal userLat = bughuntLocationReqDto.latitude();
+        BigDecimal userLng = bughuntLocationReqDto.longitude();
+        int radius = bughuntLocationReqDto.radius();
+
         // 반경: 미터 -> 각도
         BigDecimal radiusInMeters = new BigDecimal(radius);
         BigDecimal oneDegreeInMeters = new BigDecimal(111000);  // 위도 1도는 약 111,000m
