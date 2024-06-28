@@ -24,8 +24,8 @@ public class UserController {
     @Operation(summary = "로그인 확인", description = "해당 클라이언트의 로그인 확인")
     @GetMapping("/user/confirm")
     public ResponseEntity<String> confirm(HttpServletRequest request){
-        String userInfo = String.valueOf(userService.loginConfirmUserID(request));
-        return new ResponseEntity<>(userInfo, HttpStatus.OK);
+        String loginId = String.valueOf(userService.loginConfirmUserID(request));
+        return new ResponseEntity<>(loginId, HttpStatus.OK);
     }
 
     @GetMapping("/test")
