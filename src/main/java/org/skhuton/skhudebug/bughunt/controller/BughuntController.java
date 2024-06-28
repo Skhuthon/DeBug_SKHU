@@ -6,6 +6,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.skhuton.skhudebug.bughunt.domain.Bughunt;
 import org.skhuton.skhudebug.bughunt.dto.request.BughuntLocationReqDto;
+import org.skhuton.skhudebug.bughunt.dto.response.BughuntInfoResDto;
 import org.skhuton.skhudebug.bughunt.dto.response.BughuntListResDto;
 import org.skhuton.skhudebug.common.dto.BaseResponse;
 import org.skhuton.skhudebug.exception.SuccessCode;
@@ -36,6 +37,12 @@ public class BughuntController {
     public BaseResponse<BughuntListResDto> bughuntFindAll(){
         BughuntListResDto bughuntListResDto = bughuntService.findAll();
         return BaseResponse.success(SuccessCode.GET_SUCCESS, bughuntListResDto);
+    }
+    @Operation(summary = "헌트 요청 개별 id 조회", description = "개별 id로 헌트 요청 조회하기")
+    @GetMapping("/{id}")
+    public BaseResponse<BughuntInfoResDto> bughuntFindById(@PathVariable Long id){
+        BughuntInfoResDto bughuntInfoResDto = bughuntService.findById(id);
+        return BaseResponse.success(SuccessCode.GET_SUCCESS, bughuntInfoResDto);
     }
 
     @Operation(summary = "헌트 요청 범위 조회", description = "헌터 위치 범위 내에 있는 헌트 요청들 조회하기")

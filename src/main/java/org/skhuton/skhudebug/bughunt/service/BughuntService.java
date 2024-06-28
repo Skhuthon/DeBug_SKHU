@@ -1,5 +1,6 @@
 package org.skhuton.skhudebug.bughunt.service;
 
+import jakarta.persistence.EntityNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.skhuton.skhudebug.bughunt.domain.Bughunt;
 import org.skhuton.skhudebug.bughunt.dto.request.BughuntLocationReqDto;
@@ -65,6 +66,12 @@ public class BughuntService {
                 .map(BughuntInfoResDto::from)
                 .toList();
         return BughuntListResDto.from(bughuntInfoResDtoList);
+    }
+
+    public BughuntInfoResDto findById(Long id){
+        Bughunt bughunt = bughuntRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("버그 헌트 요청 id 조회 불가: " + id));
+        return BughuntInfoResDto.from(bughunt);
     }
 
     public BughuntListResDto findByRadius(BughuntLocationReqDto bughuntLocationReqDto) {
