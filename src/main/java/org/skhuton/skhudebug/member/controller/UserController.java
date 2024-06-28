@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.skhuton.skhudebug.member.dto.response.UserInfo;
 import org.skhuton.skhudebug.member.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,9 +24,8 @@ public class UserController {
      */
     @Operation(summary = "로그인 확인", description = "해당 클라이언트의 로그인 확인")
     @GetMapping("/user/confirm")
-    public ResponseEntity<String> confirm(HttpServletRequest request){
-        String loginId = String.valueOf(userService.loginConfirmUserID(request));
-        return new ResponseEntity<>(loginId, HttpStatus.OK);
+    public ResponseEntity<UserInfo> confirm(HttpServletRequest request){
+        return new ResponseEntity<>(userService.loginConfirmUserID(request), HttpStatus.OK);
     }
 
     @GetMapping("/test")

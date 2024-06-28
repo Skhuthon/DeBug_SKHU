@@ -3,7 +3,7 @@ package org.skhuton.skhudebug.member.service;
 
 import org.skhuton.skhudebug.member.domain.Role;
 import org.skhuton.skhudebug.member.domain.User;
-import org.skhuton.skhudebug.member.dto.JoinRequestDto;
+import org.skhuton.skhudebug.member.dto.request.JoinRequestDto;
 import org.skhuton.skhudebug.member.execption.InvalidUserException;
 import org.skhuton.skhudebug.member.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -26,12 +26,12 @@ public class UserJoinService {
     @Transactional
     public void join(JoinRequestDto joinRequestDto) {
         // 비밀번호를 암호화
-        String encodedPassword = passwordEncoder.encode(joinRequestDto.getPassword());
-        validateDuplicateLoginId(joinRequestDto.getLoginId());
+        String encodedPassword = passwordEncoder.encode(joinRequestDto.password());
+        validateDuplicateLoginId(joinRequestDto.loginId());
         User user = User.builder()
-                .loginId(joinRequestDto.getLoginId())
+                .loginId(joinRequestDto.loginId())
                 .password(encodedPassword)
-                .nickname(joinRequestDto.getNickname())
+                .nickname(joinRequestDto.nickname())
                 .role(Role.ROLE_USER)
                 .build();
         // 회원 정보 저장
