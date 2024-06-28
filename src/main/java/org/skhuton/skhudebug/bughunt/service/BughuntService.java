@@ -9,6 +9,8 @@ import org.skhuton.skhudebug.bughunt.dto.response.BughuntListResDto;
 import org.skhuton.skhudebug.bughunt.repository.BughuntRepository;
 import org.skhuton.skhudebug.exception.ErrorCode;
 import org.skhuton.skhudebug.exception.model.NotFoundException;
+import org.skhuton.skhudebug.match.domain.HuntReqManagement;
+import org.skhuton.skhudebug.match.repository.HuntMatchRepository;
 import org.skhuton.skhudebug.member.domain.User;
 import org.skhuton.skhudebug.member.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -25,9 +27,10 @@ import java.util.List;
 public class BughuntService {
     private final BughuntRepository bughuntRepository;
     private final UserRepository userRepository;
+    private final HuntMatchRepository huntMatchRepository;
 
     @Transactional
-    public Bughunt save(BughuntSaveReqDto bughuntSaveReqDto) {
+    public void save(BughuntSaveReqDto bughuntSaveReqDto) {
         User user = userRepository.findByLoginId(bughuntSaveReqDto.loginId()).orElseThrow(
                 ()-> new NotFoundException(
                         ErrorCode.USER_NOT_FOUND,
@@ -43,7 +46,17 @@ public class BughuntService {
                 .radius(bughuntSaveReqDto.radius())
                 .build();
         bughunt.setCreatedAt(LocalDateTime.now());
-        return bughuntRepository.save(bughunt);
+        bughuntRepository.save(bughunt);
+
+        //요청 아이디 값 가져와서 저장하기.
+        Bughunt getvalue = bughuntRepository.findByUser(user);
+        HuntReqManagement huntReqManagement = HuntReqManagement.builder()
+                .requestId(getvalue.getId())
+                .senderId(user.getLoginId())
+                .receiveId(null)
+                .complete(false)
+                .build();
+        huntMatchRepository.save(huntReqManagement);
     }
 
     public BughuntListResDto findAll(){

@@ -20,11 +20,6 @@ public class CustomAuthenticationSuccessHandler implements AuthenticationSuccess
     private final UserRepository userRepository;
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
-        String nickname = userRepository.findByLoginId(authentication.getName()).get().getNickname();
-        Cookie cookie = new Cookie("nickname", nickname);
-        cookie.setHttpOnly(false);
-        cookie.setSecure(true);
-        response.addCookie(cookie);
         response.setStatus(HttpServletResponse.SC_OK);
     }
 }
