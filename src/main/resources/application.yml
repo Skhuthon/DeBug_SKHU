@@ -17,6 +17,10 @@ spring:
       hibernate:
         format_sql: false
         use_sql_comments: true
+  sql:
+    init:
+      encoding: UTF-8
+      mode: always
   session:
     jdbc:
       initialize-schema: always
