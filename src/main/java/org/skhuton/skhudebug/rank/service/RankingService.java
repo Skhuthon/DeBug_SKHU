@@ -5,7 +5,6 @@ import org.skhuton.skhudebug.member.repository.UserRepository;
 import org.skhuton.skhudebug.rank.dto.HuntTimeRanking;
 import org.skhuton.skhudebug.rank.repository.HuntTimeRepository;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,9 +12,9 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RankingService {
     private final HuntTimeRepository huntTimeRepository;
+    private final UserRepository userRepository;
 
-    @Transactional(readOnly = true)
-    public List<HuntTimeRanking> getRanking() {
-        return huntTimeRepository.findByOrderByTimesDesc();
-    }
+public List<HuntTimeRanking> getRanking() {
+    return huntTimeRepository.findByOrderByTimesDesc();
+}
 }
