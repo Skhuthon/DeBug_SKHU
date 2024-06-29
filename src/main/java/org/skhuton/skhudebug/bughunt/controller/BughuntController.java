@@ -45,10 +45,19 @@ public class BughuntController {
         return BaseResponse.success(SuccessCode.GET_SUCCESS, bughuntInfoResDto);
     }
 
+//    @Operation(summary = "헌트 요청 범위 조회", description = "헌터 위치 범위 내에 있는 헌트 요청들 조회하기")
+//    @GetMapping("/nearby")
+//    public BaseResponse<BughuntListResDto> bughuntFindRadius(@RequestBody BughuntLocationReqDto bughuntLocationReqDto){
+//        BughuntListResDto bughuntListResDto = bughuntService.findByRadius(bughuntLocationReqDto);
+//        return BaseResponse.success(SuccessCode.BUGHUNT_RADIUS_GET_SUCCESS, bughuntListResDto);
+//    }
     @Operation(summary = "헌트 요청 범위 조회", description = "헌터 위치 범위 내에 있는 헌트 요청들 조회하기")
     @GetMapping("/nearby")
-    public BaseResponse<BughuntListResDto> bughuntFindRadius(@RequestBody BughuntLocationReqDto bughuntLocationReqDto){
-        BughuntListResDto bughuntListResDto = bughuntService.findByRadius(bughuntLocationReqDto);
+    public BaseResponse<BughuntListResDto> bughuntFindRadius(
+            @RequestParam BigDecimal latitude,
+            @RequestParam BigDecimal longitude,
+            @RequestParam int radius){
+        BughuntListResDto bughuntListResDto = bughuntService.findByRadius(latitude, longitude, radius);
         return BaseResponse.success(SuccessCode.BUGHUNT_RADIUS_GET_SUCCESS, bughuntListResDto);
     }
 }
