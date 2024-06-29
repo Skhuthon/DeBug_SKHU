@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.SseEmitter;
 
 import java.io.IOException;
+import java.math.BigDecimal;
 
 @Slf4j
 @RestController
@@ -57,8 +58,8 @@ public class BughuntController {
     @Operation(summary = "헌트 요청 범위 조회", description = "헌터 위치 범위 내에 있는 헌트 요청들 조회하기")
     @GetMapping("/nearby")
     public BaseResponse<BughuntListResDto> bughuntFindRadius(
-            @RequestParam String latitude,
-            @RequestParam String longitude,
+            @RequestParam BigDecimal latitude,
+            @RequestParam BigDecimal longitude,
             @RequestParam int radius){
         BughuntListResDto bughuntListResDto = bughuntService.findByRadius(latitude, longitude, radius);
         return BaseResponse.success(SuccessCode.BUGHUNT_RADIUS_GET_SUCCESS, bughuntListResDto);

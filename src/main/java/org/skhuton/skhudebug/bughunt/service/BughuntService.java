@@ -81,9 +81,7 @@ public class BughuntService {
         return BughuntInfoResDto.from(bughunt);
     }
 
-    public BughuntListResDto findByRadius(String latitude, String longitude, int radius) {
-        BigDecimal userLat = new BigDecimal(latitude);
-        BigDecimal userLng = new BigDecimal(longitude);
+    public BughuntListResDto findByRadius(BigDecimal latitude, BigDecimal longitude, int radius) {
 
         // 반경: 미터 -> 각도
         BigDecimal radiusInMeters = new BigDecimal(radius);
@@ -93,14 +91,14 @@ public class BughuntService {
         BigDecimal rangeLat = radiusInMeters.divide(oneDegreeInMeters, MathContext.DECIMAL128); //반경을 미터 단위로 나눔
 
         // 위도를 고려한 경도 범위 변환
-        BigDecimal cosLat = BigDecimal.valueOf(Math.cos(Math.toRadians(userLat.doubleValue())));   //cosin 조정, 적도에서 멀어질수록 경도 사이의 거리가 줄어듦
+        BigDecimal cosLat = BigDecimal.valueOf(Math.cos(Math.toRadians(latitude.doubleValue())));   //cosin 조정, 적도에서 멀어질수록 경도 사이의 거리가 줄어듦
         BigDecimal rangeLng = radiusInMeters.divide(oneDegreeInMeters.multiply(cosLat), MathContext.DECIMAL128);
 
         // 거리 계산(경계 상자 생성)
-        BigDecimal minLat = userLat.subtract(rangeLat);
-        BigDecimal maxLat = userLat.add(rangeLat);
-        BigDecimal minLng = userLng.subtract(rangeLng);
-        BigDecimal maxLng = userLng.add(rangeLng);
+        BigDecimal minLat = latitude.subtract(rangeLat);
+        BigDecimal maxLat = latitude.add(rangeLat);
+        BigDecimal minLng = longitude.subtract(rangeLng);
+        BigDecimal maxLng = longitude.add(rangeLng);
 
         List<Bughunt> bughunts = bughuntRepository.findByLatitudeBetweenAndLongitudeBetween(minLat, maxLat, minLng, maxLng);
         List<BughuntInfoResDto> bughuntInfoResDtoList = bughunts.stream()
